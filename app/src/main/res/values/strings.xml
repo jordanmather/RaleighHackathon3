@@ -1,5 +1,8 @@
 <resources>
+
     <string name="app_name">raleighProject</string>
+
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -8,6 +11,7 @@
     <string name="title_activity_avg_week">AvgWeek</string>
     <string name="title_activity_avg_month">AvgMonth</string>
     <string name="title_activity_avg_year">AvgYear</string>
+
 
     <string name="title_activity_main_activity2">MainActivity2Activity</string>
 

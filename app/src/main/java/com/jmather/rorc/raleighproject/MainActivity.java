@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -20,16 +21,21 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
+
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import org.json.JSONArray;
+
 
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.Date;
+
+import java.util.Timer;
+
 
 
 
@@ -84,6 +90,7 @@ public class MainActivity extends ActionBarActivity {
     {
         //start a thread to deal with the recording, then display the dashboard
         //RecordingDrive rd = new RecordingDrive(); //might be threaded later and need more
+
         GPSTracker gps = new GPSTracker(this);
         int dayOfYear = Calendar.DAY_OF_YEAR;
         String date = "" + dayOfYear;
@@ -102,6 +109,13 @@ public class MainActivity extends ActionBarActivity {
         }
 
         Intent intent = new Intent(this, DashboardActivity.class);
+
+
+        GPS startGPS = new GPS();
+        startGPS.start();
+
+        Intent gold = new Intent(this, DashboardActivity.class);
+         recording = true;
 
         intent.putExtra("isRecording", recording);
         startActivity(intent);

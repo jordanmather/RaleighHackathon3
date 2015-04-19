@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.TextView;
+
+
 
 public class AvgWeek extends ActionBarActivity {
 
@@ -12,6 +15,30 @@ public class AvgWeek extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avg_week);
+
+
+        //week is saturday to friday
+
+        String date = "04/19/2015";
+        String day = "sat";
+
+        TextView todayDate = (TextView)findViewById(R.id.date);
+        todayDate.setText(date);
+
+        int timeDrivenWeek = InfoCalculator.totalTimeWeek(date);
+        TextView totalTimeText = (TextView)findViewById(R.id.weekAT);
+        int totalTimeInHours = timeDrivenWeek/60;
+        int minutesLeftover = timeDrivenWeek%60;
+        totalTimeText.setText(totalTimeInHours + ":" + minutesLeftover);
+
+        double totalDistanceWeek = InfoCalculator.totalDistanceWeek(date);
+        TextView totalDistanceText = (TextView)findViewById(R.id.weekAD);
+        totalDistanceText.setText(totalDistanceWeek + "");
+
+        double averageSpeed = totalDistanceWeek/(timeDrivenWeek/60);
+        TextView averageSpeedText = (TextView)findViewById(R.id.weekAS);
+        averageSpeedText.setText(averageSpeed + "mph");
+
     }
 
 

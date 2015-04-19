@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import android.widget.TextView;
+
+
 
 public class DashboardActivity extends ActionBarActivity {
 
@@ -24,6 +27,33 @@ public class DashboardActivity extends ActionBarActivity {
             Button endTrip = (Button)findViewById(R.id.endRecording);
             endTrip.setVisibility(View.VISIBLE);
         }
+
+        //Call InfoCalculator
+        InfoCalculator ic = new InfoCalculator();
+        String date = "04/19/2015";
+
+        TextView todayDate = (TextView)findViewById(R.id.date);
+        todayDate.setText(date);
+
+
+        int totalTime = InfoCalculator.totalTimeDriven(date);
+        TextView totalTimeText = (TextView)findViewById(R.id.todayTT);
+        int totalTimeInHours = totalTime/60;
+        int minutesLeftover = totalTime%60;
+        totalTimeText.setText(totalTimeInHours + ":" + minutesLeftover);
+
+        double totalMiles = InfoCalculator.totalDistanceDriven(date);
+        TextView totalDistanceText = (TextView)findViewById(R.id.todayTM);
+        totalDistanceText.setText(Math.round(totalMiles) + "");
+
+        double averageSpeed = totalMiles/(totalTime/60);
+        TextView averageSpeedText = (TextView)findViewById(R.id.todayAS);
+        averageSpeedText.setText(averageSpeed + "mph");
+
+
+
+
+
 
     }
 

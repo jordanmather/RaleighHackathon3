@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/RaleighHackathon3-master.iml" filepath="$PROJECT_DIR$/RaleighHackathon3-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/raleighproject.iml" filepath="$PROJECT_DIR$/raleighproject.iml" />
+>>>>>>> 5d1ec3f286d250e7fe4df686fb533e4fcc2c998e
     </modules>
   </component>
 </project>

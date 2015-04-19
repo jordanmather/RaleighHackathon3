@@ -6,7 +6,11 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.barnbuilders.nicholaslargen.mycommute.DashboardActivity"
     android:background="@drawable/backgrounddash"
+
     android:id="@+id/todayTT">
+
+    android:id="@+id/todayT">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,6 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/black"
+
         android:textSize="40dp" />
 
     <Button
@@ -31,16 +36,25 @@
         android:clickable="true"
         android:onClick="avgDay"/>
         android:clickable="true"
+
+        android:textSize="40dp" /><![CDATA[
+
+    android:clickable="true"
+
         android:onClick="avgDay"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/TodayLabel"
         android:layout_toStartOf="@+id/TodayLabel" />
 
 
+    ]]>
+
+
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="Avg Week"
         android:id="@+id/avgweekbutton"
 
@@ -50,11 +64,25 @@
         android:layout_alignParentBottom="true"
         android:onClick="avgWeek"/>
 
+        android:text="This week"
+        android:id="@+id/avgweekbutton"
+
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="avgWeek"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <![CDATA[
+
+
         android:layout_toRightOf="@+id/avgdaybutton"
         android:clickable="true"
         android:layout_alignParentBottom="true"
         android:onClick="avgWeek"
         android:layout_alignTop="@+id/avgdaybutton" />
+
 
 
     <Button
@@ -72,11 +100,15 @@
         android:onClick="avgMonth"/>
 
         android:clickable="true"
+
+    android:clickable="true"
+
         android:onClick="avgMonth"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/avgweekbutton"
         android:layout_toEndOf="@+id/avgweekbutton"
         android:layout_alignTop="@+id/avgweekbutton" />
+
 
     <Button
         android:layout_width="wrap_content"
@@ -92,10 +124,20 @@
         android:onClick="avgYear"/>
 
         android:clickable="true"
+
+
+
+    android:clickable="true"
+
         android:onClick="avgYear"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/AVGMONTH"
         android:layout_toEndOf="@+id/AVGMONTH" />
+
+
+
+
+    ]]>
 
 
     <TextView
@@ -166,16 +208,29 @@
         android:layout_below="@+id/TodayLabel"
         android:layout_centerHorizontal="true" />
 
+        android:id="@+id/date"
+        android:layout_below="@+id/TodayLabel"
+        android:layout_centerHorizontal="true"
+        android:text="today&apos;s date" />
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="End Trip"
         android:id="@+id/endRecording"
         android:layout_above="@+id/avgweekbutton"
+
         android:layout_toRightOf="@+id/avgdaybutton"
         android:layout_alignRight="@+id/avgspeedval"
         android:layout_alignEnd="@+id/avgspeedval"
         android:visibility="invisible" />
+
+        android:layout_alignRight="@+id/avgspeedval"
+        android:layout_alignEnd="@+id/avgspeedval"
+        android:visibility="invisible"
+        android:layout_toLeftOf="@+id/TodayLabel" />
+
 
     <TextView
         android:layout_width="wrap_content"

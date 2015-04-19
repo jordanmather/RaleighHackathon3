@@ -8,6 +8,7 @@
     android:background="@drawable/backgrounddash"
     android:id="@+id/weekAM">
 
+
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -55,6 +56,7 @@
         android:layout_toRightOf="@+id/button12"
         android:layout_toEndOf="@+id/button12" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,7 +72,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Date Goes here"
-        android:id="@+id/textView8"
+
+
+
+        android:id="@+id/date"
+
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true" />
 
@@ -79,10 +85,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Avg Weekly Time Driven:"
-        android:id="@+id/avgweeklytime"
+
+
+        android:text="Time Driven this Week:"
+        android:id="@+id/weeklyTime"
         android:layout_marginTop="43dp"
-        android:layout_below="@+id/textView8"
+        android:layout_below="@+id/date"
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -90,10 +99,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+
         android:text="Avg Weekly Mileage Driven:"
         android:id="@+id/avgweeklymileage"
         android:layout_marginTop="52dp"
         android:layout_below="@+id/avgweeklytime"
+
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -103,7 +115,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Avg Weekly Speed:"
         android:id="@+id/avgweeklyspeed"
+
         android:layout_below="@+id/avgweeklymileage"
+
+
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="63dp" />
@@ -113,16 +129,26 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/weekAT"
+
         android:layout_alignBottom="@+id/avgweeklytime"
         android:layout_alignRight="@+id/button16"
         android:layout_alignEnd="@+id/button16" />
+
+        android:layout_alignBottom="@+id/weeklyTime"
+        android:layout_alignLeft="@+id/weekAD"
+        android:layout_alignStart="@+id/weekAD" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView10"
-        android:layout_alignBottom="@+id/avgweeklymileage"
+
+
+
+        android:id="@+id/weekAD"
+        android:layout_alignBottom="@+id/weeklymileage"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

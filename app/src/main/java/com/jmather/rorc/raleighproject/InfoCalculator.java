@@ -16,7 +16,11 @@ public class InfoCalculator
      * The contents of this class might end up needing to be split into different classes
      * this class will server as a way to outline the methods to be implemented
      */
-    LinkedList<String> saveData;
+
+
+
+    static LinkedList<String> saveData;
+
 
     public InfoCalculator(LinkedList<String> saveData)
     {
@@ -27,6 +31,10 @@ public class InfoCalculator
 
     public InfoCalculator()
     {
+
+
+        saveData = new LinkedList<String>();
+
         //the mock method in case we need fake data for demonstration
         int monthCount = 0;
         int dayCount = 0;
@@ -77,7 +85,10 @@ public class InfoCalculator
 
     }
 
-    private double totalDriveDistance()
+
+
+    private static double totalDriveDistance()
+
     {
         //i'm using this varaible enough that I should write a separate method for it
         double totalDistance = 0;
@@ -101,6 +112,7 @@ public class InfoCalculator
         return totalDistance;
     }
 
+
     public double averageDriveDistance()
     {
 
@@ -109,7 +121,77 @@ public class InfoCalculator
         return averageDistance;
     }
 
-    public double averageDayDriveDistance(String day)
+
+    public static int totalTimeDriven(String day)
+    {
+        int totalTimeDriven = 0;
+        for(int i = 0; i < saveData.size(); i++)
+        {
+            //search for the current date
+            String currentDate = "";
+            JSONObject currentDrive;
+            try
+            {
+                currentDrive = new JSONObject(saveData.get(i));
+                currentDate = currentDrive.getString("date");
+            }
+            catch(JSONException e)
+            {
+                e.printStackTrace();
+            }
+            if(currentDate.equals(day))
+            {
+                //get the time and add it to that day
+                totalTimeDriven += InfoCalculator.getTime(saveData.get(i));
+            }
+        }
+        return totalTimeDriven;
+    }
+
+    /**
+     * get total distance driven in the specified day
+     * @param day
+     * @return
+     */
+    public static double totalDistanceDriven(String day)
+    {
+        double totalDistanceDriven = 0.0;
+        for(int i = 0; i < saveData.size(); i++)
+        {
+            String currentDate = "";
+            JSONObject currentDrive;
+            try
+            {
+                currentDrive = new JSONObject(saveData.get(i));
+                currentDate = currentDrive.getString("date");
+            }
+            catch(JSONException e)
+            {
+                e.printStackTrace();
+            }
+            if(currentDate.equals(day))
+            {
+                //get the distance and add it to that day
+                JSONObject jObject;
+                Double distance = 0.0;
+                try{
+                    jObject = new JSONObject(saveData.get(i));
+                    distance = jObject.getDouble("distance");
+                }
+                catch(JSONException e) {
+                    e.printStackTrace();
+                }
+                totalDistanceDriven += distance;
+            }
+
+
+        }
+        return totalDistanceDriven;
+    }
+
+
+    public static double averageDayDriveDistance(String day)
+
     {
 		/*
 		 * takes a day of the week and finds the average distance driven on that day of the week
@@ -188,8 +270,12 @@ public class InfoCalculator
         //clean up by increment the days counter
         dayCount++;
         //get the average by dividing the total distance by the days
-        double averageDistancePerDay = this.totalDriveDistance()/dayCount;
-        return totalDistance;
+
+
+
+        double averageDistancePerDay = totalDriveDistance()/dayCount;
+        return averageDistancePerDay;
+
     }
 
     /**
@@ -200,7 +286,11 @@ public class InfoCalculator
      * @param date
      * @return the average distance traveled as a double
      */
-    public double averageWeekDriveDistance(String date)
+
+
+
+    public static double averageWeekDriveDistance(String date)
+
     {
         int count = 0;
         double totalDistance = 0;
@@ -232,7 +322,9 @@ public class InfoCalculator
     }
 
 
-    public double averageMonthDriveDistance(int twoDigitMonth, int fourDigitYear)
+
+    public static double averageMonthDriveDistance(int twoDigitMonth, int fourDigitYear)
+
     {
         //Setup variables
         int count = 0;
@@ -294,7 +386,9 @@ public class InfoCalculator
 
     }
 
-    public double averageYearDriveDistance(int fourDigitYear)
+
+    public static double averageYearDriveDistance(int fourDigitYear)
+
     {
         //Setup variables
         int count = 0;
@@ -353,10 +447,12 @@ public class InfoCalculator
 
     }
 
-    public int averageTimeDriven()
+
+    public static int averageTimeDriven()
     {
         //when we have the total for the distance travelled
-        int averageTime = this.totalTime()/saveData.size();
+        int averageTime = totalTime()/saveData.size();
+
         return averageTime;
     }
 
@@ -364,12 +460,16 @@ public class InfoCalculator
      * returns the total time driven in the save file in minutes
      * @return
      */
-    private int totalTime()
+
+
+    private static int totalTime()
+
     {
         //i'm using this varaible enough that I should write a separate method for it
         int totalTime = 0;
         for(int i = 0; i < saveData.size(); i++)//for each index of saveData
         {
+
             //get the start time
             JSONObject jObject;
             String getStartTime = "";
@@ -414,10 +514,442 @@ public class InfoCalculator
                         -(Integer.parseInt(startComponents[0]))*60);
             }
 
+
+            getTime(saveData.get(i));
+
         }
         return totalTime;
     }
 
+    private static String getDate(String driveInstance)
+    {
+        JSONObject jObject;
+        String getDate = "";
+        try{
+            jObject = new JSONObject(driveInstance);
+            getDate = jObject.getString("Date");
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return getDate;
+    }
+
+    private static String getDay(String driveInstance)
+    {
+        JSONObject jObject;
+        String getDay = "";
+        try{
+            jObject = new JSONObject(driveInstance);
+            getDay = jObject.getString("Day");
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return getDay;
+    }
+
+    private static double getDistance(String driveInstance)
+    {
+        JSONObject jObject;
+        double getDistance = 0.0;
+        try{
+            jObject = new JSONObject(driveInstance);
+            getDistance = jObject.getDouble("Distance");
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return getDistance;
+    }
+
+    /**
+     * returns the total time from the given record
+     * @param driveInstance
+     * @return
+     */
+    private static int getTime(String driveInstance)
+    {
+        int totalTime;
+        //get the start time
+        JSONObject jObject;
+        String getStartTime = "";
+        try{
+            jObject = new JSONObject(driveInstance);
+            JSONObject getTimeObject = new JSONObject(jObject.getString("time"));
+            getStartTime = getTimeObject.getString("startTime");
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        //get the end time
+        JSONObject jObject1;
+        String getEndTime = "";
+        try{
+            jObject = new JSONObject(driveInstance);
+            JSONObject getTimeObject = new JSONObject(jObject.getString("time"));
+            getEndTime = getTimeObject.getString("endTime");
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        String startTime = getStartTime;
+        //get the end time
+        String endTime = getEndTime;
+        //****CONTINUE
+        //total time in minutes
+        String[] startComponents = startTime.split(":");
+        String[] endComponents = endTime.split(":");
+
+        if(Integer.parseInt(startComponents[0]) > Integer.parseInt(endComponents[0]))
+        {
+            totalTime = (24-(Integer.parseInt(startComponents[0])
+                    -Integer.parseInt(endComponents[0]))*60);
+        }
+        else
+        {
+            totalTime = (Integer.parseInt(endComponents[0])
+                    -(Integer.parseInt(startComponents[0]))*60);
+        }
+        return totalTime;
+    }
+
+    public static int totalTimeWeek(String date)
+    {
+        //search for date
+        int totalTime = 0;
+        int index = 0;
+        for(int i = 0; i < saveData.size(); i++)
+        {
+            InfoCalculator.getDate(saveData.get(i));
+            if(getDate(saveData.get(i)).equals(date))
+            {
+                while(getDate(saveData.get(i)).equals(date))
+                {
+                    i++;
+                }
+                index = i-1;//go back to last valid driveInstance of the given day
+                break;
+            }
+        }
+        //get the day we need to head back to
+        String day = InfoCalculator.getDay(saveData.get(index));//get the day of the week from our current day
+        if(day.equals("fri"))
+        {
+            boolean currentFri = true;
+            while(!day.equals("fri") || currentFri)
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+                if(!day.equals("fri") && currentFri)
+                {
+                    //we just left the current friday we were in
+                    currentFri = false;
+                    //continue until we hit friday again
+                }
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalTime = totalTime/7;
+
+        }
+        else if(day.equals("thu"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalTime = totalTime/6;
+        }
+        else if(day.equals("wed"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalTime = totalTime/5;
+        }
+        else if(day.equals("tue"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalTime = totalTime/4;
+        }
+        else if(day.equals("mon"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalTime = totalTime/3;
+        }
+        else if(day.equals("sun"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalTime = totalTime/2;
+        }
+        else if(day.equals("sat"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalTime += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalTime = totalTime/1;
+
+        }
+        return totalTime;
+    }
+
+
+
+    public static double totalDistanceWeek(String date)
+    {
+        //search for date
+        double totalDistanceDriven = 0.0;
+        int index = 0;
+        for(int i = 0; i < saveData.size(); i++)
+        {
+            InfoCalculator.getDate(saveData.get(i));
+            if(getDate(saveData.get(i)).equals(date))
+            {
+                while(getDate(saveData.get(i)).equals(date))
+                {
+                    i++;
+                }
+                index = i-1;//go back to last valid driveInstance of the given day
+                break;
+            }
+        }
+        //get the day we need to head back to
+        String day = InfoCalculator.getDay(saveData.get(index));//get the day of the week from our current day
+        if(day.equals("fri"))
+        {
+            boolean currentFri = true;
+            while(!day.equals("fri") || currentFri)
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+                if(!day.equals("fri") && currentFri)
+                {
+                    //we just left the current friday we were in
+                    currentFri = false;
+                    //continue until we hit friday again
+                }
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalDistanceDriven = totalDistanceDriven/7;
+
+        }
+        else if(day.equals("thu"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalDistanceDriven = totalDistanceDriven/6;
+        }
+        else if(day.equals("wed"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalDistanceDriven = totalDistanceDriven/5;
+        }
+        else if(day.equals("tue"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalDistanceDriven = totalDistanceDriven/4;
+        }
+        else if(day.equals("mon"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalDistanceDriven = totalDistanceDriven/3;
+        }
+        else if(day.equals("sun"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getTime(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalDistanceDriven = totalDistanceDriven/2;
+        }
+        else if(day.equals("sat"))
+        {
+            while(!day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                index--;
+                day = InfoCalculator.getDay(saveData.get(index));
+
+            }
+            //we must've hit the next friday
+            while(day.equals("fri"))
+            {
+                totalDistanceDriven += InfoCalculator.getDistance(saveData.get(index));
+                day = InfoCalculator.getDay(saveData.get(index));
+                index--;
+            }
+            //we're past the end of the week, we should have the totalMinutes
+            totalDistanceDriven = totalDistanceDriven/1;
+        }
+        return totalDistanceDriven;
+    }
 
 
 }
